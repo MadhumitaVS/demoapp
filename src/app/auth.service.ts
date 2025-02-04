@@ -1,45 +1,31 @@
-// src/app/auth.service.ts
-
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';  // Added Observable import
+import { User } from './models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Mock users data
-  private users = [
-    { username: 'admin', password: 'admin123', role: 'admin' },
-    { username: 'user', password: 'user123', role: 'user' }
-  ];
 
-  // Store login state and user info
-  private currentUserSubject: BehaviorSubject<any> = new BehaviorSubject(null);
-  public currentUser = this.currentUserSubject.asObservable();
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
-  constructor() {}
-
-  login(username: string, password: string) {
-    // Find the user by username and check the password
-    const user = this.users.find(u => u.username === username && u.password === password);
-    
-    if (user) {
-      // If the user exists and credentials match, store user info
-      this.currentUserSubject.next(user);
-      return true;
-    }
-    return false;
+  constructor() {
+    const currentUser = localStorage.getItem('currentUser');
+    this.currentUserSubject = new BehaviorSubject<User>(currentUser ? JSON.parse(currentUser) : null);
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  logout() {
-    // Clear user info and state on logout
-    this.currentUserSubject.next(null);
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
   }
 
-  // Check if the current user has a particular role
+  // This method checks if the current user has a specific role
   hasRole(role: string): boolean {
-    const user = this.currentUserSubject.value;
-    return user ? user.role === role : false;
+    const user = this.currentUserValue;
+    return user && user.roles && user.roles.includes(role);
   }
-}
 
+  // Add other authentication methods as needed (login, logout, etc.)
+}
