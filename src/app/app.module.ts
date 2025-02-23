@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';  // Import header component
-import { SidebarComponent } from './sidebar/sidebar.component';  // Import sidebar component
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { FormsModule } from '@angular/forms'; // Make sure you have this for ngModel
 import { AppRoutingModule } from './app-routing.module';
-
+import { AppComponent } from './app.component';
+import { LoginComponent } from './auth/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,  // Declare the header component
-    SidebarComponent  // Declare the sidebar component
+    LoginComponent, // Declare LoginComponent
+    // ... other components
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule, // Include FormsModule
+    HttpClientModule, // Include HttpClientModule
+    // ... other modules
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,9 @@ import { User } from './models/user.model'; // Make sure you have a User model
   providedIn: 'root'
 })
 export class AuthService {
+  hasRole(requiredRole: any) {
+    throw new Error('Method not implemented.');
+  }
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;

@@ -2,8 +2,8 @@
     {
       "id": 1,
       "username": "admin",
-      "password": "password", // In a real app, NEVER store passwords in plain text!
-      "role": "admin"
+      "password": "password",
+      "role": "admin"  
     },
     {
       "id": 2,

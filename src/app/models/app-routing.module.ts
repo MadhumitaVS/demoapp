@@ -1,21 +1,13 @@
-<app-header></app-header>
-<app-sidebar></app-sidebar>
-<router-outlet></router-outlet>  ```
-
-**6. Routing (`app-routing.module.ts`):**
-
-```typescript
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuard } from './core/auth.guard'; // Or wherever your AuthGuard is
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route
-  { path: '**', redirectTo: '/login' } // Catch-all route for unknown paths
+  { path: '**', redirectTo: '/login' } // Redirect to login for unknown routes
 ];
 
 @NgModule({

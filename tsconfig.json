@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./", 
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -16,7 +17,14 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022"
+    "module": "ES2022",
+    "paths": {
+        "@app/*": ["src/app/*"],
+        "@auth/*": ["src/app/auth/*"],
+        "@auth/login/*": ["src/app/auth/login/*"], // Add this line!
+        "@guards/*": ["src/app/guards/*"],
+        "@dashboard/*": ["src/app/dashboard/*"]
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
